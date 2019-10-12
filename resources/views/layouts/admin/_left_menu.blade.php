@@ -12,9 +12,15 @@
                     <a class="js-arrow" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                 </li>
+
                 <li class="active has-sub">
                     <a class="js-arrow" href="{{ route('post.index') }}">
                         <i class="fas fa-folder-open"></i>Post</a>
+                </li>
+
+                <li class="active has-sub">
+                    <a class="js-arrow" href="{{ route('post.index') }}">
+                        <i class="fas fa-bars"></i>Category</a>
                 </li>
             </ul>
         </nav>

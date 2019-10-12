@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -47,6 +48,7 @@ class PostController extends Controller
         }
 
         Post::create($data);
+        session()->flash('success','post created successfully!');
         return redirect()->route('post.index');
 
     }
@@ -70,7 +72,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $data['post'] = $post;
+        return view('admin.post.edit',$data);
     }
 
     /**
@@ -82,7 +85,20 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data['title'] = $request->title;
+        $data['details'] = $request->details;
+
+        if ($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $file->move('images/post/',$file->getClientOriginalName());
+            File::delete($post->image);
+            $data['image'] = 'images/post/'.$file->getClientOriginalName();
+        }
+
+        $post->update($data);
+        session()->flash('success','post updated successfully!');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -93,6 +109,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        session()->flash('delete','post deleted successfully!');
+        return redirect()->route('post.index');
     }
 }
