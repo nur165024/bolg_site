@@ -19,8 +19,13 @@
                 </li>
 
                 <li class="active has-sub">
-                    <a class="js-arrow" href="{{ route('post.index') }}">
+                    <a class="js-arrow" href="{{ route('category.index') }}">
                         <i class="fas fa-bars"></i>Category</a>
+                </li>
+
+                <li class="active has-sub">
+                    <a class="js-arrow" href="{{ route('category.index') }}">
+                        <i class="fas fa-user"></i>Authors</a>
                 </li>
             </ul>
         </nav>
