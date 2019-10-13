@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -26,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $data['categories'] = Category::all();
+        $data['authors'] = Author::all();
+        return view('admin.post.create',$data);
     }
 
     /**
@@ -37,6 +41,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $data['category_id'] = $request->category_id;
+        $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;
         $data['details'] = $request->details;
 
@@ -85,6 +91,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $data['category_id'] = $request->category_id;
+        $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;
         $data['details'] = $request->details;
 

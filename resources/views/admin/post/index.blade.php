@@ -17,6 +17,8 @@
                     <thead>
                         <tr>
                             <th>id</th>
+                            <th>Category Name</th>
+                            <th>Author Name</th>
                             <th>Post Title</th>
                             <th>Post description</th>
                             <th>Post Image</th>
@@ -28,6 +30,8 @@
                         @foreach($posts as $post)
                             <tr>
                                 <td>{{ $post->id }}</td>
+                                <td>{{ $post->category->name }}</td>
+                                <td>{{ $post->author->name }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->details }}</td>
                                 <td><img src="{{ asset($post->image) }}" width="60" alt=""></td>

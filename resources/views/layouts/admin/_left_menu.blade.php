@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="active has-sub">
-                    <a class="js-arrow" href="{{ route('category.index') }}">
+                    <a class="js-arrow" href="{{ route('author.index') }}">
                         <i class="fas fa-user"></i>Authors</a>
                 </li>
             </ul>

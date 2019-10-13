@@ -19,3 +19,4 @@ Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard')
 
 Route::resource('post','PostController');
 Route::resource('category','CategoryController');
+Route::resource('author','AuthorController');

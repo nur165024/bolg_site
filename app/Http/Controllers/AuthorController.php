@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AuthorController extends Controller
 {
@@ -14,7 +15,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $data['authors'] = Author::all();
+        return view('admin.author.index',$data);
     }
 
     /**
@@ -24,7 +26,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data['name'] = $request->name;
+        $data['details'] = $request->details;
+
+        if ($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $file->move('images/author/',$file->getClientOriginalName());
+            $data['image'] = 'images/author/'.$file->getClientOriginalName();
+        }
+
+        Author::create($data);
+        session()->flash('success','author created successfully!');
+        return redirect()->route('author.index');
     }
 
     /**
@@ -57,7 +71,8 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        $data['author'] = $author;
+        return view('admin.author.edit',$data);
     }
 
     /**
@@ -69,7 +84,20 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $data['name'] = $request->name;
+        $data['details'] = $request->details;
+
+        if ($request->hasFile('image'))
+        {
+            $file = $request->file('image');
+            $file->move('images/author/',$file->getClientOriginalName());
+            File::delete($author->image);
+            $data['image'] = 'images/author/'.$file->getClientOriginalName();
+        }
+
+        $author->update($data);
+        session()->flash('success','author Updated successfully!');
+        return redirect()->route('author.index');
     }
 
     /**
