@@ -14,26 +14,26 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-                                <img src="{{ asset('assets/admin/images/icon/avatar-01.jpg') }}"
-                                     alt="John Doe"/>
+                                <img src="{{ asset($user->user_image) }}"
+                                     alt="{{ $user->name }}"/>
                             </div>
                             <div class="content">
-                                <a class="js-acc-btn" href="#">john doe</a>
+                                <a class="js-acc-btn" href="#">{{ $user->name }}</a>
                             </div>
 
                             <div class="account-dropdown js-dropdown">
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="{{ asset('assets/admin/images/icon/avatar-01.jpg') }}"
-                                                 alt="John Doe"/>
+                                            <img src="{{ asset($user->user_image) }}"
+                                                 alt="{{ $user->name }}"/>
                                         </a>
                                     </div>
                                     <div class="content">
                                         <h5 class="name">
-                                            <a href="#">john doe</a>
+                                            <a href="#">{{ $user->name }}</a>
                                         </h5>
-                                        <span class="email">johndoe@example.com</span>
+                                        <span class="email">{{ $user->email }}</span>
                                     </div>
                                 </div>
 
@@ -41,14 +41,6 @@
                                     <div class="account-dropdown__item">
                                         <a href="#">
                                             <i class="zmdi zmdi-account"></i>Account</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-settings"></i>Setting</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-money-box"></i>Billing</a>
                                     </div>
                                 </div>
 

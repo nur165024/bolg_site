@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data['users'] = User::all();
+        return view('admin.user.index',$data);
     }
 
     /**
@@ -34,7 +37,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
+
+        if ($request->hasFile('user_image'))
+        {
+            $file = $request->file('user_image');
+            $file->move('images/user/',$file->getClientOriginalName());
+            $data['user_image'] = 'images/user/'.$file->getClientOriginalName();
+        }
+
+        User::create($data);
+        session()->flash('success','user created successfully!');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -56,7 +72,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['user'] = User::findOrFail($id);
+        return view('admin.user.edit',$data);
     }
 
     /**
@@ -68,7 +85,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
+
+        if ($request->hasFile('user_image'))
+        {
+            $file = $request->file('user_image');
+            $file->move('images/user/',$file->getClientOriginalName());
+            File::delete($user->user_image);
+            $data['user_image'] = 'images/user/'.$file->getClientOriginalName();
+        }
+
+        User::findOrFail($id)->update($data);
+        session()->flash('success','user created successfully!');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -79,6 +110,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        session()->flash('delete','user deleted successfully!');
+        return redirect()->route('user.index');
     }
 }

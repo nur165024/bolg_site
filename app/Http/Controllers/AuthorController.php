@@ -108,6 +108,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        session()->flash('delete','Author Delete successfully!');
+        return redirect()->route('author.index');
     }
 }

@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard');
+Route::get('login','LoginController@index')->name('user.login');
 
 Route::resource('post','PostController');
 Route::resource('category','CategoryController');
 Route::resource('author','AuthorController');
+Route::resource('user','UserController');

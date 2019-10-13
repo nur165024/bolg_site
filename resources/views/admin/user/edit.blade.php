@@ -16,12 +16,15 @@
                 </a>
             </div>
             <div class="login-form">
-                <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('user.update',$user->id) }}" method="post" enctype="multipart/form-data">
 
                     @csrf
+
+                    @method('put')
+
                     @include('admin.user._form')
 
-                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Update</button>
                 </form>
             </div>
         </div>
