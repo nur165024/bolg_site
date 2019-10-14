@@ -41,6 +41,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'image' => 'mimes:png,jpeg',
+        ]);
+
         $data['category_id'] = $request->category_id;
         $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;
@@ -79,6 +87,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $data['post'] = $post;
+        $data['categories'] = Category::all();
+        $data['authors'] = Author::all();
         return view('admin.post.edit',$data);
     }
 
@@ -91,6 +101,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'image' => 'mimes:png,jpeg',
+        ]);
+
         $data['category_id'] = $request->category_id;
         $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;

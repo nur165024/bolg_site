@@ -37,9 +37,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'user_image' => 'mimes:jpeg,png',
+        ]);
+
         $data['name'] = $request->name;
         $data['email'] = $request->email;
-        $data['password'] = $request->password;
+        $data['password'] = bcrypt($request->password);
 
         if ($request->hasFile('user_image'))
         {
@@ -85,16 +92,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'password' => 'required',
+            'user_image' => 'mimes:jpeg,png',
+        ]);
+
         $data['name'] = $request->name;
         $data['email'] = $request->email;
-        $data['password'] = $request->password;
+        $data['password'] = bcrypt($request->password);
 
         if ($request->hasFile('user_image'))
         {
             $file = $request->file('user_image');
-            $file->move('images/user/',$file->getClientOriginalName());
-            File::delete($user->user_image);
+            $file->move(public_path('images/user/'),$file->getClientOriginalName());
             $data['user_image'] = 'images/user/'.$file->getClientOriginalName();
+
+            if (file_exists('user_image'))
+            {
+                unlink($this->user_image);
+            }
         }
 
         User::findOrFail($id)->update($data);

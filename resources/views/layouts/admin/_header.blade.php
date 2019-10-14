@@ -14,26 +14,26 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-                                <img src="{{ asset($user->user_image) }}"
-                                     alt="{{ $user->name }}"/>
+                                <img src="{{ auth()->user()->user_image }}"
+                                     alt="John Doe"/>
                             </div>
                             <div class="content">
-                                <a class="js-acc-btn" href="#">{{ $user->name }}</a>
+                                <a class="js-acc-btn" href="#">{{ auth()->user()->name }}</a>
                             </div>
 
                             <div class="account-dropdown js-dropdown">
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="{{ asset($user->user_image) }}"
-                                                 alt="{{ $user->name }}"/>
+                                            <img src="{{ auth()->user()->user_image }}"
+                                                 alt="John Doe"/>
                                         </a>
                                     </div>
                                     <div class="content">
                                         <h5 class="name">
-                                            <a href="#">{{ $user->name }}</a>
+                                            <a href="#">{{ auth()->user()->name }}</a>
                                         </h5>
-                                        <span class="email">{{ $user->email }}</span>
+                                        <span class="email">{{ auth()->user()->email }}</span>
                                     </div>
                                 </div>
 
@@ -42,11 +42,21 @@
                                         <a href="#">
                                             <i class="zmdi zmdi-account"></i>Account</a>
                                     </div>
+                                    <div class="account-dropdown__item">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-settings"></i>Setting</a>
+                                    </div>
+                                    <div class="account-dropdown__item">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                    </div>
                                 </div>
 
                                 <div class="account-dropdown__footer">
-                                    <a href="#">
-                                        <i class="zmdi zmdi-power"></i>Logout</a>
+                                    <form class="button" action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button class="btn btn-primary"><i class="zmdi zmdi-power"></i> Logout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

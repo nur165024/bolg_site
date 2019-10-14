@@ -37,6 +37,11 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'image' => 'mines:jpeg,png',
+        ]);
+
         $data['name'] = $request->name;
         $data['details'] = $request->details;
 
@@ -84,6 +89,12 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
+        $request->validate([
+            'name' => 'required',
+            'image' => 'mines:jpeg,png',
+        ]);
+
+
         $data['name'] = $request->name;
         $data['details'] = $request->details;
 
@@ -108,6 +119,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+
         $author->delete();
         session()->flash('delete','Author Delete successfully!');
         return redirect()->route('author.index');
