@@ -29,7 +29,7 @@
                     <tbody>
                         @foreach($posts as $post)
                             <tr>
-                                <td>{{ $post->id }}</td>
+                                <td>{{ $serial++ }}</td>
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->author->name }}</td>
                                 <td>{{ $post->title }}</td>

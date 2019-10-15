@@ -25,5 +25,8 @@ Route::middleware('auth')->group(function (){
     Route::resource('user','UserController');
 });
 
-//font end templating
+//is-featured
+//total hit
+// published at
+
 

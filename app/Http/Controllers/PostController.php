@@ -17,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data['posts'] = Post::all();
+        $data['serial'] = 1;
+        $data['posts'] = Post::orderBy('id','desc')->get();
         return view('admin.post.index',$data);
     }
 
@@ -28,8 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $data['categories'] = Category::all();
-        $data['authors'] = Author::all();
+        $data['categories'] = Category::orderBy('name')->get();
+        $data['authors'] = Author::orderBy('name')->get();
         return view('admin.post.create',$data);
     }
 
