@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('login','LoginController@index')->name('user.login');
 Route::post('login','LoginController@login')->name('login');
@@ -27,6 +25,5 @@ Route::middleware('auth')->group(function (){
     Route::resource('user','UserController');
 });
 
-//validation
 //font end templating
 

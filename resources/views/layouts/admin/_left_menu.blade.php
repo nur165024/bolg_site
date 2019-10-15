@@ -32,6 +32,11 @@
                     <a class="js-arrow" href="{{ route('user.index') }}">
                         <i class="fas fa-user"></i>User</a>
                 </li>
+
+                <li class="active has-sub">
+                    <a class="js-arrow" href="{{ route('home') }}">
+                        <i class="fas fa-globe"></i>Go To web site</a>
+                </li>
             </ul>
         </nav>
     </div>
