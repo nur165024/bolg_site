@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('category','CategoryController');
     Route::resource('author','AuthorController');
     Route::resource('user','UserController');
+    Route::resource('sociallink','SociallinkController');
 });
 
 //is-featured

@@ -14,7 +14,7 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-                                <img src="{{ auth()->user()->user_image }}"
+                                <img src="{{ asset(auth()->user()->user_image) }}"
                                      alt="John Doe"/>
                             </div>
                             <div class="content">
@@ -25,7 +25,7 @@
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="{{ auth()->user()->user_image }}"
+                                            <img src="{{ asset(auth()->user()->user_image) }}"
                                                  alt="John Doe"/>
                                         </a>
                                     </div>

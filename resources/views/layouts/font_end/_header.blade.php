@@ -2,10 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-9 social">
-                <a href="#"><span class="fa fa-twitter"></span></a>
-                <a href="#"><span class="fa fa-facebook"></span></a>
-                <a href="#"><span class="fa fa-instagram"></span></a>
-                <a href="#"><span class="fa fa-youtube-play"></span></a>
+                @foreach($sociallinks as $sociallink)
+                    <a target="_blank" href="{{ $sociallink->social_link }}"><span class="fa {{ $sociallink->social_font }}"></span></a>
+                @endforeach
             </div>
             <div class="col-3 search-top">
                 <form action="#" class="search-top-form">

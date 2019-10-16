@@ -34,6 +34,11 @@
                 </li>
 
                 <li class="active has-sub">
+                    <a class="js-arrow" href="{{ route('sociallink.index') }}">
+                        <i class="fas fa-desktop"></i>Socila Link</a>
+                </li>
+
+                <li class="active has-sub">
                     <a class="js-arrow" href="{{ route('home') }}">
                         <i class="fas fa-globe"></i>Go To web site</a>
                 </li>
