@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sociallink extends Model
 {
-    protected $fillable = ['social_link','social_font'];
+    protected $fillable = ['social_link','social_font','social_name'];
 }

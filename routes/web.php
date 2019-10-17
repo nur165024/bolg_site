@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('post/details/{id}','HomeController@details')->name('post.details');
+Route::get('category/post/{id}','HomeController@category')->name('category');
 
 Route::get('login','LoginController@index')->name('user.login');
 Route::post('login','LoginController@login')->name('login');
@@ -24,10 +26,10 @@ Route::middleware('auth')->group(function (){
     Route::resource('author','AuthorController');
     Route::resource('user','UserController');
     Route::resource('sociallink','SociallinkController');
+    Route::resource('about','AboutController');
 });
 
-//is-featured
-//total hit
-// published at
-
+// featured update
+//strtotime kaj kore na
+//
 

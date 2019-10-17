@@ -36,6 +36,12 @@ class SociallinkController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'social_link' => 'required',
+            'social_font' => 'required',
+            'social_name' => 'required',
+        ]);
+
         Sociallink::create($request->except('_token'));
 
         session()->flash('success','Social link Created Successfully!');
@@ -75,6 +81,12 @@ class SociallinkController extends Controller
      */
     public function update(Request $request, Sociallink $sociallink)
     {
+        $request->validate([
+            'social_link' => 'required',
+            'social_font' => 'required',
+            'social_name' => 'required',
+        ]);
+
         $sociallink->update($request->except('_token'));
 
         session()->flash('success','Social link Updated successfully!');

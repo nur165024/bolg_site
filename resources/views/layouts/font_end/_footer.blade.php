@@ -72,12 +72,9 @@
                     <div class="mb-5">
                         <h3>Social</h3>
                         <ul class="list-unstyled footer-social">
-                            <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                            <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                            <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                            <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>
-                            <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                            <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>
+                            @foreach($sociallinks as $sociallink)
+                                <li><a target="_blank" href="{{ $sociallink->social_link }}"><span class="fa {{ $sociallink->social_font }}"></span>{{ $sociallink->social_name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

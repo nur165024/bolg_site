@@ -16,6 +16,17 @@
            placeholder="Enter your social font"
            class="form-control @error('social_font') is-invalid @enderror">
     @error('social_font')
-    <div class="text-danger">{{ $message }}</div>
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="social_name">Social Name</label>
+    <input type="text" name="social_name" value="{{ old('social_name',isset($sociallink) ? $sociallink->social_name:null) }}"
+           id="social_name"
+           placeholder="Enter your social Name"
+           class="form-control @error('social_name') is-invalid @enderror">
+    @error('social_name')
+        <div class="text-danger">{{ $message }}</div>
     @enderror
 </div>

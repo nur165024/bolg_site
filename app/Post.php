@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['category_id','author_id','title','details','image'];
+    protected $fillable = ['category_id','author_id','title','details','status','is_featured','image'];
 
     public function category()
     {
@@ -16,5 +16,10 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status','published');
     }
 }

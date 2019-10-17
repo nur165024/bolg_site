@@ -20,6 +20,8 @@
                             <th>Category Name</th>
                             <th>Author Name</th>
                             <th>Post Title</th>
+                            <th>Post Status</th>
+                            <th>Post Featured</th>
                             <th>Post description</th>
                             <th>Post Image</th>
                             <th>Action</th>
@@ -33,6 +35,8 @@
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->author->name }}</td>
                                 <td>{{ $post->title }}</td>
+                                <td>{{ $post->status }}</td>
+                                <td>{{ $post->is_featured }}</td>
                                 <td>{{ $post->details }}</td>
                                 <td><img src="{{ asset($post->image) }}" width="60" alt=""></td>
                                 <td>

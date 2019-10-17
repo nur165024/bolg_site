@@ -47,13 +47,19 @@ class PostController extends Controller
             'author_id' => 'required',
             'title' => 'required',
             'details' => 'required',
+            'status' => 'required',
             'image' => 'mimes:png,jpeg',
         ]);
 
         $data['category_id'] = $request->category_id;
         $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;
+        $data['status'] = $request->status;
         $data['details'] = $request->details;
+        if ($request->has('is_featured'))
+        {
+            $data['is_featured'] = $request->is_featured;
+        }
 
         if ($request->hasFile('image'))
         {
@@ -107,12 +113,14 @@ class PostController extends Controller
             'author_id' => 'required',
             'title' => 'required',
             'details' => 'required',
+            'status' => 'required',
             'image' => 'mimes:png,jpeg',
         ]);
 
         $data['category_id'] = $request->category_id;
         $data['author_id'] = $request->author_id;
         $data['title'] = $request->title;
+        $data['status'] = $request->status;
         $data['details'] = $request->details;
 
         if ($request->hasFile('image'))
