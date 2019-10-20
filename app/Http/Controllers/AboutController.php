@@ -14,8 +14,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $data['abouts'] = About::all();
-        return view('admin.about.index');
+        $data['abouts'] = About::orderBy('id','desc')->get();
+        return view('admin.about.index',$data);
     }
 
     /**
@@ -36,7 +36,12 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'details' => 'required',
+            'image' => 'image|nullable|max:2000',
+        ]);
+
         $data['title'] = $request->title;
         $data['details'] = $request->details;
 
@@ -71,7 +76,8 @@ class AboutController extends Controller
      */
     public function edit(About $about)
     {
-        //
+        $data['about'] = $about;
+        return view('admin.about.edit',$data);
     }
 
     /**
@@ -83,6 +89,12 @@ class AboutController extends Controller
      */
     public function update(Request $request, About $about)
     {
+        $request->validate([
+            'title' => 'required',
+            'details' => 'required',
+            'image' => 'image|nullable|max:2000',
+        ]);
+
         $data['title'] = $request->title;
         $data['details'] = $request->details;
 
@@ -91,13 +103,14 @@ class AboutController extends Controller
             $file = $request->file('image');
             $file->move('images/about/',$file->getClientOriginalName());
             $data['image'] = 'images/about/'.$file->getClientOriginalName();
-            if (file_exists('image'))
+
+            if (file_exists($about->image))
             {
-                unlink($this->image);
+                unlink($about->image);
             }
         }
 
-        About::create($data);
+        $about->update($data);
         session()->flash('success','About Updated Successfully!');
         return redirect()->route('about.index');
     }
@@ -110,6 +123,11 @@ class AboutController extends Controller
      */
     public function destroy(About $about)
     {
+        if (file_exists($about->image))
+        {
+            unlink($about->image);
+        }
+
         $about->delete();
 
         session()->flash('delete','About Deleted Successfully!');

@@ -37,7 +37,7 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->status }}</td>
                                 <td>{{ $post->is_featured }}</td>
-                                <td>{{ $post->details }}</td>
+                                <td>{{ Str::words($post->details,10) }}</td>
                                 <td><img src="{{ asset($post->image) }}" width="60" alt=""></td>
                                 <td>
                                     <a class="btn btn-success btn-sm" href="{{ route('post.edit',$post->id) }}">Edit</a>

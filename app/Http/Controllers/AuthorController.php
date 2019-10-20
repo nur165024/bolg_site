@@ -39,7 +39,7 @@ class AuthorController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'mines:jpeg,png',
+            'image' => 'image|nullable|max:2000',
         ]);
 
         $data['name'] = $request->name;

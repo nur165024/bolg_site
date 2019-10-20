@@ -56,6 +56,7 @@ class PostController extends Controller
         $data['title'] = $request->title;
         $data['status'] = $request->status;
         $data['details'] = $request->details;
+
         if ($request->has('is_featured'))
         {
             $data['is_featured'] = $request->is_featured;
@@ -114,7 +115,7 @@ class PostController extends Controller
             'title' => 'required',
             'details' => 'required',
             'status' => 'required',
-            'image' => 'mimes:png,jpeg',
+            'image' => 'max:2000|mimes:png,jpeg',
         ]);
 
         $data['category_id'] = $request->category_id;
@@ -122,13 +123,23 @@ class PostController extends Controller
         $data['title'] = $request->title;
         $data['status'] = $request->status;
         $data['details'] = $request->details;
+        if ($request->has('is_featured'))
+        {
+            $data['is_featured'] = $request->is_featured;
+        }else{
+            $data['is_featured'] = 0;
+        }
 
         if ($request->hasFile('image'))
         {
             $file = $request->file('image');
             $file->move('images/post/',$file->getClientOriginalName());
-            File::delete($post->image);
             $data['image'] = 'images/post/'.$file->getClientOriginalName();
+
+            if (file_exists($post->image))
+            {
+                unlink($post->image);
+            }
         }
 
         $post->update($data);
@@ -144,6 +155,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (file_exists($post->image))
+        {
+            unlink($post->image);
+        }
         $post->delete();
         session()->flash('delete','post deleted successfully!');
         return redirect()->route('post.index');

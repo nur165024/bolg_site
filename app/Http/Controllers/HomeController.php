@@ -18,6 +18,7 @@ class HomeController extends Controller
         $data['popular_posts'] = Post::with(['category','author'])->published()->orderBy('total_hit','desc')->limit(3)->get();
         $data['featured_posts'] = Post::with(['category','author'])->where('is_featured',1)->published()->get();
         $data['latest_posts'] = Post::with(['category','author'])->orderBy('id','desc')->published()->paginate(4);
+        $data['latest_posts_limit_3'] = Post::orderBy('id','desc')->published()->limit(3)->get();
         return view('font_end.index',$data);
     }
 
@@ -30,6 +31,7 @@ class HomeController extends Controller
         $data['categories'] = Category::orderBy('name')->get();
         $data['authors'] = Author::all();
         $data['sociallinks'] = Sociallink::all();
+        $data['latest_posts_limit_3'] = Post::orderBy('id','desc')->published()->limit(3)->get();
         return view('font_end.details',$data);
     }
 
@@ -40,6 +42,7 @@ class HomeController extends Controller
         $data['sociallinks'] = Sociallink::all();
         $data['popular_posts'] = Post::with(['category','author'])->published()->orderBy('total_hit','desc')->limit(3)->get();
         $data['posts'] = Post::with(['category','author'])->published()->where('category_id',$id)->paginate(2);
+        $data['latest_posts_limit_3'] = Post::orderBy('id','desc')->published()->limit(3)->get();
         return view('font_end.category_post',$data);
     }
 }

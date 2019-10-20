@@ -10,7 +10,7 @@
                             <div class="text">
                                 <h4>{{ $post->title }}</h4>
                                 <div class="post-meta">
-                                    <span class="mr-2">March 15, 2018 </span>
+                                    <span class="mr-2">{{ $post->created_at }}</span>
                                 </div>
                             </div>
                         </a>

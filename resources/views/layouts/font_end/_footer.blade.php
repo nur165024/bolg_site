@@ -15,42 +15,19 @@
                     <h3>Latest Post</h3>
                     <div class="post-entry-sidebar">
                         <ul>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_6.jpg" alt="Image placeholder" class="mr-4">
-                                    <div class="text">
-                                        <h4>How to Find the Video Games of Your Youth</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                            @foreach($latest_posts_limit_3 as $post)
+                                <li>
+                                    <a href="{{ route('post.details',$post->id) }}">
+                                        <img src="{{ asset($post->image) }}" alt="Image placeholder" class="mr-4">
+                                        <div class="text">
+                                            <h4>{{ $post->title }}</h4>
+                                            <div class="post-meta">
+                                                <span class="mr-2">{{ $post->created_at }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_3.jpg" alt="Image placeholder" class="mr-4">
-                                    <div class="text">
-                                        <h4>How to Find the Video Games of Your Youth</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                                    <div class="text">
-                                        <h4>How to Find the Video Games of Your Youth</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span> &bullet;
-                                            <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -61,11 +38,9 @@
                     <div class="mb-5">
                         <h3>Quick Links</h3>
                         <ul class="list-unstyled">
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">Travel</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Courses</a></li>
-                            <li><a href="#">Categories</a></li>
+                            <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
 
