@@ -1,14 +1,16 @@
 <div class="container">
     <div class="row mb-5">
         <div class="col-md-4">
-            <h3>About Us</h3>
-            <p class="mb-4">
-                <img src="images/img_1.jpg" alt="Image placeholder" class="img-fluid">
-            </p>
+            @foreach($abouts as $about)
+                <h3>About Us</h3>
+                <p class="mb-4">
+                    <img src="{{ asset($about->image) }}" alt="Image placeholder" class="img-fluid">
+                </p>
 
-            <p>Lorem ipsum dolor sit amet sa ksal sk sa, consectetur adipisicing elit. Ipsa harum inventore
-                reiciendis. <a href="#">Read More</a></p>
+                <p>{{ Str::words($about->details,15) }}<a href="{{ route('about.font') }}">Read More</a></p>
+            @endforeach
         </div>
+
         <div class="col-md-6 ml-auto">
             <div class="row">
                 <div class="col-md-7">
