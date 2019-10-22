@@ -26,6 +26,7 @@
     <!-- END header -->
 
     <!-- START main section -->
+
     @yield('content')
     <!-- END main section -->
 

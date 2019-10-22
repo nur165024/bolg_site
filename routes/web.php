@@ -16,6 +16,7 @@ Route::get('post/details/{id}','HomeController@details')->name('post.details');
 Route::get('category/post/{id}','HomeController@category')->name('category');
 Route::get('about/page','HomeController@about')->name('about.font');
 Route::get('contact','HomeController@contact')->name('contact');
+Route::post('contact','HomeController@store')->name('contact.store');
 
 Route::get('login','LoginController@index')->name('user.login');
 Route::post('login','LoginController@login')->name('login');
@@ -29,7 +30,7 @@ Route::middleware('auth')->group(function (){
     Route::resource('user','UserController');
     Route::resource('sociallink','SociallinkController');
     Route::resource('about','AboutController');
-    Route::get('contact/index','ContactController@index')->name('contact.index')
+    Route::get('contact/index','ContactController@index')->name('contact.index');
 });
 
 

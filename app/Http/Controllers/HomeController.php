@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\About;
 use App\Author;
 use App\Category;
+use App\Contact;
 use App\Post;
 use App\Sociallink;
 use Illuminate\Http\Request;
@@ -63,6 +64,25 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('');
+        $data['abouts'] = About::all();
+        $data['categories'] = Category::orderBy('name')->get();
+        $data['sociallinks'] = Sociallink::all();
+        $data['latest_posts_limit_3'] = Post::orderBy('id','desc')->published()->limit(3)->get();
+        $data['popular_posts'] = Post::with(['category','author'])->published()->orderBy('total_hit','desc')->limit(3)->get();
+        return view('font_end.contact',$data);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'message' => 'required',
+        ]);
+
+        Contact::create($request->except('_token'));
+        session()->flash('success','message send successfully!');
+        return redirect()->back();
     }
 }

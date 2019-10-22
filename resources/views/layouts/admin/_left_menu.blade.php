@@ -44,6 +44,11 @@
                 </li>
 
                 <li class="active has-sub">
+                    <a class="js-arrow" href="{{ route('contact.index') }}">
+                        <i class="fas fa-envelope"></i>Contact</a>
+                </li>
+
+                <li class="active has-sub">
                     <a class="js-arrow" href="{{ route('home') }}">
                         <i class="fas fa-globe"></i>Go To web site</a>
                 </li>
