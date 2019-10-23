@@ -22,4 +22,9 @@ class Post extends Model
     {
         return $query->where('status', 'published');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

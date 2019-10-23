@@ -17,6 +17,7 @@ Route::get('category/post/{id}','HomeController@category')->name('category');
 Route::get('about/page','HomeController@about')->name('about.font');
 Route::get('contact','HomeController@contact')->name('contact');
 Route::post('contact','HomeController@store')->name('contact.store');
+Route::post('comment/{id}','CommentController@store')->name('comment.store');
 
 Route::get('login','LoginController@index')->name('user.login');
 Route::post('login','LoginController@login')->name('login');

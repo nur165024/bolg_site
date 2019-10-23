@@ -31,50 +31,47 @@
 
 
                     <div class="pt-5">
-                        <h3 class="mb-5">6 Comments</h3>
+                        <h3 class="mb-5">{{ $post->comments()->count() }} Comments</h3>
                         <ul class="comment-list">
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img src="{{ asset('assets/font_end/images/person_1.jpg') }}" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>Jean Doe</h3>
-                                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                            </li>
+                            @foreach($post->comments as $comment)
+                                <li class="comment">
+                                    <div class="vcard">
+                                        <img src="{{ asset($comment->user->user_image) }}" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h3>{{ $comment->user->name }}</h3>
+                                        <div class="meta">{{ $comment->created_at }}</div>
+                                        <p>{{ $comment->message }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                         <!-- END comment-list -->
 
-                        <div class="comment-form-wrap pt-5">
-                            <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
-                                <div class="form-group">
-                                    <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
-                                </div>
+                        @guest
+                            <p>plz login then comment <a
+                                    href="{{ route('user.login') }}">login</a></p>
+                        @else
+                            <div class="comment-form-wrap pt-5">
+                                @include('layouts.admin._alert')
+                                <h3 class="mb-5">Leave a comment</h3>
+                                <form action="{{ route('comment.store',$post->id) }}" method="post" class="p-5 bg-light">
 
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Post Comment" class="btn btn-primary">
-                                </div>
+                                    @csrf
 
-                            </form>
-                        </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" id="message" rows="10" class="form-control"></textarea>
+                                        @error('message')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <button class="btn btn-primary">post comment</button>
+
+                                </form>
+                            </div>
+                        @endguest
                     </div>
 
                 </div>
